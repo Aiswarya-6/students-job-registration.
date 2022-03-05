@@ -18,8 +18,8 @@ class StudentRegisterController extends Controller
     public function list()
     {
         try {
-            $response = StudentRegister::has('education')->orderBy('id', 'desc')->get();
-
+            $response = StudentRegister::with('education')->orderBy('id', 'desc')->get();
+           
             if (empty($response->toArray())) {
                 throw new \Exception('No results found.');
             }
@@ -33,7 +33,7 @@ class StudentRegisterController extends Controller
             ], 400);
         }
 
-        return view('studentList')->with(array('response' => $response));
+        return view('dashboard')->with(array('response' => $response));
     }
     /**
      * Insert student details.
@@ -72,16 +72,15 @@ class StudentRegisterController extends Controller
             ]);
 
             $education = Education::create([
-                'district' => $request->district,
-                'state' => $request->state,
                 'course' => $request->course,
                 'college' => $request->college,
                 'passOut' => $request->passOut,
                 'percentage' => $request->percentage,
+                'studentId'=>$student['id'],
 
             ]);
 
-            dd($education->toArray());
+         
             return redirect('student/list');
         } catch (\Exception $e) {
             $error = [
@@ -121,7 +120,6 @@ class StudentRegisterController extends Controller
                 'state' => 'required|string',
                 'district' => 'required|string',
                 'address' => 'required|string',
-                'district' => 'required|string',
                 'state' => 'required|string',
                 'course' => 'required|string',
                 'college' => 'required|string',

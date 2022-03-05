@@ -435,7 +435,7 @@
         @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-            <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
             @else
             <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
@@ -508,60 +508,64 @@
                     <td>
                         <table>
 
-                            <tr>
+                            <thead>
+                                <tr>
 
-                                <td align="center"><b>Course</b></td>
-                                <td align="center"><b>College/University</b></td>
-                                <td align="center"><b>Year of Passing</b></td>
-                                <td align="center"><b>Percentage or CGPA</b></td>
-                            </tr>
-                            <tr>
+                                    <td align="center"><b>Course</b></td>
+                                    <td align="center"><b>College/University</b></td>
+                                    <td align="center"><b>Year of Passing</b></td>
+                                    <td align="center"><b>Percentage or CGPA</b></td>
+                                </tr>
+                            </thead>
 
-                                <td><input type="text" name="course" maxlength="30" /></td>
-                                <td><input type="text" name="college" maxlength="30" /></td>
-                                <td><input type="text" name="passOut" maxlength="30" /></td>
-                                <td><input type="text" name="percentage" maxlength="30" /></td>
-                            </tr>
-                            <!-- <button onclick="add()">Add</button>
-                            <button onclick="remove()">remove</button>
-                            <div id="new_chq"></div>
-                            <tr>
+                            <tbody>
+                                <div class="field_wrapper">
+                                    <tr>
 
-                                <td><input type="hidden" name="Course" maxlength="30" /></td>
-                                <td><input type="hidden" name="University" maxlength="30" /></td>
-                                <td><input type="hidden" name="YrOfPassing" maxlength="30" /></td>
-                                <td><input type="hidden" name="Percentage" maxlength="30" /></td>
-                            </tr> -->
+                                        <td><input type="text" name="course[]" maxlength="30" /></td>
+                                        <td><input type="text" name="college[]" maxlength="30" /></td>
+                                        <td><input type="text" name="passOut[]" maxlength="30" /></td>
+                                        <td><input type="text" name="percentage[]" maxlength="30" /></td>
 
-                            <!-- --- Submit and Reset -----------------------------------------------
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="Submit">
+                                    </tr>
+                                    <a href="javascript:void(0);" class="add_button" title="Add field">ADD</a>
+                                </div>
+                            </tbody>
 
-                    </td>
-                </tr> -->
                         </table>
-                        <input type="submit" value="Submit">
+                    </td>
+                </tr>
+
+                <input type="submit" value="Submit">
         </form>
     </div>
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-        function add() {
-            var new_chq_no = parseInt($('#total_chq').val()) + 1;
-            var new_input = "<input type='text' id='new_" + new_chq_no + "'>";
-            $('#new_chq').append(new_input);
-            $('#total_chq').val(new_chq_no)
-        }
+        $(document).ready(function() {
+            var maxField = 10; //Input fields increment limitation
+            var addButton = $('.add_button'); //Add button selector
+            var wrapper = $('.field_wrapper'); //Input field wrapper
+            var fieldHTML = ' <tr><td><input type="text" name="course[]" maxlength="30" /></td><td><input type="text" name="college[]" maxlength="30" /></td><td><input type="text" name="passOut[]" maxlength="30" /></td><td><input type="text" name="percentage[]" maxlength="30" /></td></tr><a href="javascript:void(0);" class="add_button" title="Add field">ADD</a>'; //New input field html 
+            var x = 1; //Initial field counter is 1
 
-        function remove() {
-            var last_chq_no = $('#total_chq').val();
-            if (last_chq_no > 1) {
-                $('#new_' + last_chq_no).remove();
-                $('#total_chq').val(last_chq_no - 1);
-            }
-        }
-    </script> -->
+            //Once add button is clicked
+            $(addButton).click(function() {
+                //Check maximum number of input fields
+                if (x < maxField) {
+                    x++; //Increment field counter
+                    $(wrapper).append(fieldHTML); //Add field html
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapper).on('click', '.remove_button', function(e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //Remove field html
+                x--; //Decrement field counter
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 /*
 | student  routes.
 */
@@ -27,3 +28,8 @@ Route::group([
     Route::post('create', 'StudentRegisterController@create');
     Route::get('list', 'StudentRegisterController@List');
 });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

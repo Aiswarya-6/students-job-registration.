@@ -33,5 +33,6 @@ class Education extends Model
         'college',
         'passOut',
         'percentage',
+        'studentId',
     ];
 }
