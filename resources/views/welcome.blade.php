@@ -542,10 +542,10 @@
                                     <td><input type="text" name="college[]" maxlength="30" required /></td>
                                     <td><input type="text" name="passOut[]" maxlength="30" required /></td>
                                     <td><input type="text" name="percentage[]" maxlength="30" required /></td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="add_button" title="Add field">add</a>
+                                    </td>
                                 </tr>
-                                <a href="javascript:void(0);" class="add_button" title="Add field">Add new fields</a>
-
-
                             </tbody>
 
                         </table>
@@ -562,28 +562,23 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
-            var maxField = 10; //Input fields increment limitation
-            var addButton = $('.add_button'); //Add button selector
-            var wrapper = $('.field_wrapper'); //Input field wrapper
-            var fieldHTML = ' <tr><td><input type="text" name="course[]" maxlength="30" /></td><td><input type="text" name="college[]" maxlength="30" /></td><td><input type="text" name="passOut[]" maxlength="30" /></td><td><input type="text" name="percentage[]" maxlength="30" /></td></tr><a href="javascript:void(0);" class="add_button" title="Add field">ADD</a>'; //New input field html 
-            var x = 1; //Initial field counter is 1
-
-            //Once add button is clicked
+            var maxField = 10;
+            var addButton = $('.add_button');
+            var wrapper = $('.field_wrapper');
+            var fieldHTML = '<tr><td><input type="text" name="course[]" maxlength="30" required /></td><td><input type="text" name="college[]" maxlength="30" required /></td><td><input type="text" name="passOut[]" maxlength="30" required /></td><td><input type="text" name="percentage[]" maxlength="30" required /></td><td><a href="javascript:void(0);" class="remove_button">remove</a></td></tr>';
+            var x = 1;
             $(addButton).click(function() {
-                //Check maximum number of input fields
                 if (x < maxField) {
-                    x++; //Increment field counter
-                    $(wrapper).append(fieldHTML); //Add field html
+                    x++;
+                    $(wrapper).append(fieldHTML);
                 }
             });
-
-            //Once remove button is clicked
             $(wrapper).on('click', '.remove_button', function(e) {
                 e.preventDefault();
-                $(this).parent('div').remove(); //Remove field html
-                x--; //Decrement field counter
+                $(this).closest('tr').remove();
+                x--;
             });
         });
     </script>
