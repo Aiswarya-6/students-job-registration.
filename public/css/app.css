@@ -150,6 +150,18 @@ table {
   border-color: inherit; /* 2 */
   border-collapse: collapse; /* 3 */
 }
+table, td, th {
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 8px;
+  background: #395870;
+	-webkit-background: linear-gradient(#49708f, #293f50);
+	   -moz-background: linear-gradient(#49708f, #293f50);
+	        background: linear-gradient(#49708f, #293f50);
+	color: #fff;
+  margin-left: 5%;
+}
+
 
 /*
 1. Change the font styles in all browsers.

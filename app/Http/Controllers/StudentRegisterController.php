@@ -15,11 +15,11 @@ class StudentRegisterController extends Controller
      * @param
      * @return json  message, data, statusCode, status
      */
-    public function list()
+    public function dashboard()
     {
         try {
             $response = StudentRegister::with('education')->orderBy('id', 'desc')->get();
-           
+// dd(($response->toArray()));
             if (empty($response->toArray())) {
                 throw new \Exception('No results found.');
             }
@@ -58,6 +58,7 @@ class StudentRegisterController extends Controller
     {
 
         try {
+
             // check student data is valid
             $error = $this->validateStudent($request);
             if (!empty($error['statusCode']) == 400) return response()->json($error, 400);
@@ -72,16 +73,16 @@ class StudentRegisterController extends Controller
             ]);
 
             $education = Education::create([
-                'course' => $request->course,
-                'college' => $request->college,
-                'passOut' => $request->passOut,
-                'percentage' => $request->percentage,
-                'studentId'=>$student['id'],
+                'course' => implode(' , ', $request->course),
+                'college' => implode(' , ', $request->college),
+                'passOut' => implode(' , ', $request->passOut),
+                'percentage' => implode(' , ', $request->percentage),
+                'studentId' => $student['id'],
 
             ]);
 
-         
-            return redirect('student/list');
+
+            return redirect('register/insert');
         } catch (\Exception $e) {
             $error = [
                 'errorMessage' => $e->getMessage(),
@@ -121,10 +122,10 @@ class StudentRegisterController extends Controller
                 'district' => 'required|string',
                 'address' => 'required|string',
                 'state' => 'required|string',
-                'course' => 'required|string',
-                'college' => 'required|string',
-                'passOut' => 'required|string',
-                'percentage' => 'required|string',
+                'course' => 'required|array',
+                'college' => 'required|array',
+                'passOut' => 'required|array',
+                'percentage' => 'required|array',
 
             ]
         );

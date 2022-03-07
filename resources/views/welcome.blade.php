@@ -403,7 +403,7 @@
             font-size: 25pt;
             font-style: normal;
             font-weight: bold;
-            color: SlateBlue;
+            color: #6a9550;
             text-align: center;
             text-decoration: underline
         }
@@ -415,9 +415,9 @@
             font-style: normal;
             font-weight: bold;
             text-align: ;
-            background-color: gray;
+            background-color: #6a9550;
             border-collapse: collapse;
-            border: 2px solid wheat
+            border: 2px solid #6a9550
         }
 
         table.inner {
@@ -426,6 +426,23 @@
 
         body {
             font-family: 'Nunito', sans-serif;
+        }
+
+        a.add_button {
+            border: 1px solid white;
+            background: white;
+            border-radius: 5px;
+            padding: 1px;
+
+        }
+
+        .submit {
+            background-color: white;
+            border: 1px solid white;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transform: translate(240px, 10px);
         }
     </style>
 </head>
@@ -449,13 +466,13 @@
 
         <form action="{{ url('register/create') }}" method="post">
             @csrf
-            <h3>STUDENT REGISTRATION FORM</h3>
+            <h3>STUDENT JOB - REGISTRATION FORM</h3>
             <table align="center" cellpadding="10">
 
                 <!----- First Name ---------------------------------------------------------->
                 <tr>
                     <td>FIRST NAME</td>
-                    <td><input type="text" name="firstName" maxlength="30" />
+                    <td><input type="text" name="firstName" maxlength="30" required />
 
                     </td>
                 </tr>
@@ -463,7 +480,7 @@
                 <!----- Last Name ---------------------------------------------------------->
                 <tr>
                     <td>LAST NAME</td>
-                    <td><input type="text" name="lastName" maxlength="30" />
+                    <td><input type="text" name="lastName" maxlength="30" required />
 
                     </td>
                 </tr>
@@ -472,7 +489,7 @@
                 <!----- Address ---------------------------------------------------------->
                 <tr>
                     <td>ADDRESS <br /><br /><br /></td>
-                    <td><textarea name="address" rows="4" cols="30"></textarea></td>
+                    <td><textarea name="address" rows="4" cols="30" required></textarea></td>
                 </tr>
 
                 <!----- Gender ----------------------------------------------------------->
@@ -486,7 +503,7 @@
                 <!----- City ---------------------------------------------------------->
                 <tr>
                     <td>DISTRICT</td>
-                    <td><input type="text" name="district" maxlength="30" />
+                    <td><input type="text" name="district" maxlength="30" required />
 
                     </td>
                 </tr>
@@ -495,7 +512,7 @@
                 <!----- State ---------------------------------------------------------->
                 <tr>
                     <td>STATE</td>
-                    <td><input type="text" name="state" maxlength="30" />
+                    <td><input type="text" name="state" maxlength="30" required />
 
                     </td>
                 </tr>
@@ -518,25 +535,29 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
-                                <div class="field_wrapper">
-                                    <tr>
+                            <tbody class="field_wrapper">
 
-                                        <td><input type="text" name="course[]" maxlength="30" /></td>
-                                        <td><input type="text" name="college[]" maxlength="30" /></td>
-                                        <td><input type="text" name="passOut[]" maxlength="30" /></td>
-                                        <td><input type="text" name="percentage[]" maxlength="30" /></td>
+                                <tr>
+                                    <td><input type="text" name="course[]" maxlength="30" required /></td>
+                                    <td><input type="text" name="college[]" maxlength="30" required /></td>
+                                    <td><input type="text" name="passOut[]" maxlength="30" required /></td>
+                                    <td><input type="text" name="percentage[]" maxlength="30" required /></td>
+                                </tr>
+                                <a href="javascript:void(0);" class="add_button" title="Add field">Add new fields</a>
 
-                                    </tr>
-                                    <a href="javascript:void(0);" class="add_button" title="Add field">ADD</a>
-                                </div>
+
                             </tbody>
 
                         </table>
+                        <table>
+                            <tr><input type="submit" value="Submit" class="submit"></tr>
+                        </table>
                     </td>
+
                 </tr>
 
-                <input type="submit" value="Submit">
+
+
         </form>
     </div>
 

@@ -15,38 +15,48 @@
         </div>
     </div>
     <div>
-        {{$response}}
-        <table>
-            <tr>
 
-                <th>ID</th>
-                <th>firstName</th>
-                <th>latsName</th>
-                <th>Gender</th>
-                <th>District</th>
-                <th>State</th>
-                <th>Address</th>
-                <th>Course</th>
-                <th>College/University</th>
-                <th>Year of passing</th>
-                <th>Percentage or CGPA</th>
-      
-            </tr>
-            <tr>
+        <table border="1">
+            <thead >
+                <tr>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-       
-            </tr>
+                    <th>ID</th>
+                    <th>firstName</th>
+                    <th>latsName</th>
+                    <th>Gender</th>
+                    <th>District</th>
+                    <th>State</th>
+                    <th>Address</th>
+                    <th>Course</th>
+                    <th>College/University</th>
+                    <th>Year of passing</th>
+                    <th>Percentage or CGPA</th>
+
+                </tr>
+            </thead>
+            <tbody >
+                @foreach($response as $data)
+                @if ($data['education'] == null)
+                @continue;
+                @endif
+                <tr>
+                    <td>{{$data['id']}}</td>
+                    <td>{{$data['firstName']}}</td>
+                    <td>{{$data['lastName']}}</td>
+                    <td>{{$data['gender']}}</td>
+                    <td>{{$data['district']}}</td>
+                    <td>{{$data['state']}}</td>
+                    <td>{{$data['address']}}</td>
+                    <td>{{$data['education']['course']}}</td>
+                    <td>{{$data['education']['college']}}</td>
+                    <td>{{$data['education']['passOut']}}</td>
+                    <td>{{$data['education']['percentage']}}</td>
+                </tr>
+            </tbody>
+
+
+            @endforeach
+
         </table>
     </div>
 </x-app-layout>

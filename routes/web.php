@@ -26,10 +26,14 @@ Route::group([
 ], function () {
     Route::get('insert', 'StudentRegisterController@insert');
     Route::post('create', 'StudentRegisterController@create');
-    Route::get('list', 'StudentRegisterController@List');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' =>'auth',
+], function () {
+
+    Route::get('dashboard', 'StudentRegisterController@dashboard')->name('dashboard');
+});
 
 require __DIR__.'/auth.php';

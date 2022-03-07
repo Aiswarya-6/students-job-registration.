@@ -39,6 +39,6 @@ class StudentRegister extends Model
 
     public function education()
     {
-        return $this->hasMany(Education::class, 'studentId', 'id');
+        return $this->hasOne(Education::class, 'studentId', 'id');
     }
 }
