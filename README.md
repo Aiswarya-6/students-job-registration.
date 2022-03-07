@@ -25,6 +25,10 @@ DB_PASSWORD=
       command : php artisan migrate 
     • The admi Panel credentials are inserted by using seeder ,so use the command below to run the seeder file 
       command : php artisan db:seed --class=UserSeeder 
+      
+      Adminpanel Credentials: 
+        Username : admin@gmail.com
+        Password : Admin@123
     • running applications on the PHP development server using 
       command : php artisan serve
       
